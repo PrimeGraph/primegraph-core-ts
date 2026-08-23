@@ -1,0 +1,12 @@
+{
+  // The co-located tests, built to their own output directory so the published
+  // dist/ holds the library alone. Everything else — the CommonJS module format
+  // included — is inherited, so the tests run against the code as it ships.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": false,
+    "outDir": "dist-test"
+  },
+  "include": ["src"],
+  "exclude": ["dist", "dist-test", "node_modules"]
+}

@@ -17,5 +17,7 @@
     "skipLibCheck": true
   },
   "include": ["src"],
-  "exclude": ["dist", "node_modules"]
+  // Tests are co-located with the sources they cover and must not be published.
+  // tsconfig.test.json builds them, into a separate output directory.
+  "exclude": ["dist", "dist-test", "node_modules", "src/**/*.test.ts"]
 }
