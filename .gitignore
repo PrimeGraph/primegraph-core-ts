@@ -1,0 +1,23 @@
+# Build output
+dist/
+*.tsbuildinfo
+
+# Dependencies
+node_modules/
+
+# Credentials and local environment
+# .npmrc is never committed: publish auth is injected by scripts/release.sh.
+.npmrc
+.env
+.env.*
+*.pem
+*.key
+
+# Editors and OS
+.idea/
+.vscode/
+.DS_Store
+
+# Logs
+npm-debug.log*
+yarn-error.log*

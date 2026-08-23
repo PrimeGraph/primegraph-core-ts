@@ -1,0 +1,21 @@
+{
+  // The emitted JavaScript is CommonJS. "module": "node16" follows the absence
+  // of "type": "module" in package.json, so tsc writes CJS. Keep it that way:
+  // the generated frontend packages are ESM and the generated backend packages
+  // are CommonJS, and one CJS build is importable from both. A dual CJS+ESM
+  // build would let a single graph load two copies of the same class, which is
+  // the duplicate-nominal-type problem this package exists to remove.
+  "compilerOptions": {
+    "declaration": true,
+    "strict": true,
+    "target": "es2021",
+    "module": "node16",
+    "moduleResolution": "node16",
+    "rootDir": "./src",
+    "outDir": "dist",
+    "lib": ["es2021", "dom"],
+    "skipLibCheck": true
+  },
+  "include": ["src"],
+  "exclude": ["dist", "node_modules"]
+}

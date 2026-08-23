@@ -1,0 +1,45 @@
+{
+  "//": "Deliberately CommonJS: \"type\": \"module\" must never be set here. The generated frontend packages are ESM and the generated backend packages are CommonJS, and a single CJS build is importable from both. A dual CJS+ESM build would let one graph load two copies of the same class, which is exactly the duplicate-nominal-type problem this package exists to remove.",
+  "name": "@primegraph/core",
+  "version": "0.0.0",
+  "description": "Shared cross-package vocabulary for PrimeGraph generated TypeScript packages",
+  "license": "UNLICENSED",
+  "author": "PrimeGraph Generator <generator@primegraph.ai>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/primegraph/primegraph-core-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/primegraph/primegraph-core-ts/issues"
+  },
+  "homepage": "https://github.com/primegraph/primegraph-core-ts#readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "setup": "sh scripts/setup.sh",
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "release": "sh scripts/release.sh"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "@types/node": ">=22.0.0"
+  },
+  "keywords": [
+    "primegraph",
+    "core"
+  ],
+  "dependencies": {}
+}
