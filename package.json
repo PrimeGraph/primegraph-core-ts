@@ -3,7 +3,7 @@
   "name": "@primegraph/core",
   "version": "0.0.0",
   "description": "Shared cross-package vocabulary for PrimeGraph generated TypeScript packages",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "author": "PrimeGraph Generator <generator@primegraph.ai>",
   "repository": {
     "type": "git",
@@ -14,7 +14,8 @@
   },
   "homepage": "https://github.com/primegraph/primegraph-core-ts#readme",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -7,7 +7,7 @@
 # Every check that can fail runs before anything is mutated, so an already
 # released version stops the script instead of half-publishing it.
 #
-# Requires NODE_AUTH_TOKEN, a GitHub token with write:packages.
+# Requires NODE_AUTH_TOKEN, an npmjs.com automation token for the primegraph org.
 
 set -eu
 
@@ -90,8 +90,8 @@ NPMRC=$(mktemp)
 trap 'rm -f "$NPMRC"' EXIT INT TERM
 chmod 600 "$NPMRC"
 {
-  echo "@primegraph:registry=https://npm.pkg.github.com"
-  echo "//npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN"
+  echo "@primegraph:registry=https://registry.npmjs.org"
+  echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN"
 } > "$NPMRC"
 
 if ! NPM_CONFIG_USERCONFIG="$NPMRC" npm publish; then
