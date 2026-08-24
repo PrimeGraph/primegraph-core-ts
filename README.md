@@ -26,9 +26,11 @@ There are five of these, one per target language:
 | --------------------- | -------------------------------------------------------------------------- |
 | `DslError<TPayload>`  | The one nominal type in the TypeScript runtime: `{ code, payload }`, raised by `raise` and by every helper that reports a failure. |
 | `coerceError`         | Projects any caught value onto the catch binding `{ code, payload }`.        |
+| `DslErrorView<TPayload>` | The `{ code, payload }` view a catch binding holds — the name the other four cores already use for it. |
 | `transportErrorCode`  | Names a raw SDK failure in the DSL code space, `null` when nothing names it. |
 | `defaultErrorMessage` | The declared text of an error code.                                          |
 | `issueExpectation`    | Turns a schema-validation issue into the constraint the declaration stated.  |
+| `wireShape`           | Puts a platform-enriched value back on its JSON wire shape, so a read boundary checks against the model's own schema. |
 | `HttpAuth`, `HttpRequest<TBody>`, `HttpTextResponse` | The shape of one outbound HTTP call and of what it returned. |
 | `AdminOptions`        | How a generated package is told which Firebase project to talk to.           |
 
@@ -47,7 +49,7 @@ is kept as the fast path only. `src/dsl-error.test.ts` pins this with an error r
 
 ## What is out, on purpose
 
-The expression helpers, `validateSchema`, `validateWrite`, `wireShape`, `parseResponse`,
+The expression helpers, `validateSchema`, `validateWrite`, `parseResponse`,
 `requireHandle`, `firestoreDecode`, `mapValues`, `exists`, `timeTimestamp`, the `fetch`
 implementation, and the whole Firebase client / admin surface stay inside the generated packages.
 Twenty-three of them throw `DslError` and will import it from here.
@@ -70,8 +72,9 @@ precisely the duplicate-nominal-type problem this package exists to remove.
 
 ```
 src/index.ts              public surface
-src/dsl-error.ts          DslError, coerceError, transportErrorCode, defaultErrorMessage
+src/dsl-error.ts          DslError, DslErrorView, coerceError, transportErrorCode, defaultErrorMessage
 src/issue-expectation.ts  issueExpectation
+src/wire-shape.ts         wireShape
 src/http.ts               HttpAuth, HttpRequest, HttpTextResponse
 src/admin-options.ts      AdminOptions
 src/*.test.ts             tests, co-located with the code they cover

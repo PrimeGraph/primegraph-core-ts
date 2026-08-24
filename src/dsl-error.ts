@@ -16,6 +16,21 @@
  */
 const DSL_ERROR_NAME = 'DslError';
 
+/**
+ * The `{ code, payload }` a caught DSL error is projected onto — the same view
+ * the other four cores name `DslErrorView<Payload>`. TypeScript is structurally
+ * typed, so naming the shape binds no call site to the declaration; the name is
+ * here so the five cores describe the concept with one word instead of four
+ * plus an anonymous type.
+ *
+ * The members are mutable, exactly as the anonymous shape was: a `readonly`
+ * here would reject an assignment that compiles today.
+ */
+export interface DslErrorView<TPayload> {
+  code: string;
+  payload: TPayload;
+}
+
 export class DslError<TPayload> extends Error {
   override readonly name = 'DslError' as const;
   constructor(public readonly code: string, public readonly payload: TPayload) {
@@ -168,7 +183,7 @@ function coercedPayload<T>(code: string, defaultPayload: T): T {
  * payload instead of degrading to INTERNAL_ERROR with nothing raised and nothing
  * logged.
  */
-function dslErrorView(e: unknown): { code: string; payload: unknown } | null {
+function dslErrorView(e: unknown): DslErrorView<unknown> | null {
   if (e instanceof DslError) {
     return { code: e.code, payload: e.payload };
   }
@@ -197,7 +212,7 @@ function dslErrorView(e: unknown): { code: string; payload: unknown } | null {
 // A foreign error carries no typed payload, so its own text would be lost here.
 // It goes to the log instead of the returned view: the code is what a caller may
 // put on the wire, the text stays server-side.
-export function coerceError<T>(e: unknown, defaultPayload: T): { code: string; payload: T } {
+export function coerceError<T>(e: unknown, defaultPayload: T): DslErrorView<T> {
   const raised = dslErrorView(e);
   if (raised !== null) {
     return { code: raised.code, payload: raised.payload as T };

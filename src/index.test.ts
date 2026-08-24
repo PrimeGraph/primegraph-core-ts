@@ -2,7 +2,13 @@ import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
 import * as core from './index.js';
-import type { AdminOptions, HttpAuth, HttpRequest, HttpTextResponse } from './index.js';
+import type {
+  AdminOptions,
+  DslErrorView,
+  HttpAuth,
+  HttpRequest,
+  HttpTextResponse,
+} from './index.js';
 
 describe('public surface', () => {
   it('exports exactly the names the generated packages use', () => {
@@ -12,6 +18,7 @@ describe('public surface', () => {
       'defaultErrorMessage',
       'issueExpectation',
       'transportErrorCode',
+      'wireShape',
     ]);
   });
 });
@@ -43,6 +50,18 @@ describe('shared declarations', () => {
     const response: HttpTextResponse = { status: 204, body: '', headers: {} };
 
     assert.equal(response.status, 204);
+  });
+
+  it('names the {code, payload} view the other four cores already name', () => {
+    // Structural, so `coerceError` fills it without a cast: the declaration is
+    // there to give the concept the one word the five cores share.
+    const view: DslErrorView<{ reason: string }> = core.coerceError(
+      new core.DslError('not-found', { reason: 'gone' }),
+      { reason: '' },
+    );
+
+    assert.equal(view.code, 'not-found');
+    assert.equal(view.payload.reason, 'gone');
   });
 
   it('types the admin options a generated package is configured with', () => {

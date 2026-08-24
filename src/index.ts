@@ -7,6 +7,8 @@
  */
 
 export { coerceError, defaultErrorMessage, DslError, transportErrorCode } from './dsl-error.js';
+export type { DslErrorView } from './dsl-error.js';
 export { issueExpectation } from './issue-expectation.js';
+export { wireShape } from './wire-shape.js';
 export type { HttpAuth, HttpRequest, HttpTextResponse } from './http.js';
 export type { AdminOptions } from './admin-options.js';
