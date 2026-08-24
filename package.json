@@ -1,7 +1,7 @@
 {
   "//": "Deliberately CommonJS: \"type\": \"module\" must never be set here. The generated frontend packages are ESM and the generated backend packages are CommonJS, and a single CJS build is importable from both. A dual CJS+ESM build would let one graph load two copies of the same class, which is exactly the duplicate-nominal-type problem this package exists to remove.",
   "name": "@primegraph/core",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Shared cross-package vocabulary for PrimeGraph generated TypeScript packages",
   "license": "MIT",
   "author": "PrimeGraph Generator <generator@primegraph.ai>",
