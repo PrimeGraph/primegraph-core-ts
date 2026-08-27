@@ -71,8 +71,8 @@ jobs:
 
       - uses: actions/setup-node@v6.5.0
         with:
-          # @types/node declares >=22, so 22 is the floor the package targets.
-          node-version: '22.19.0'
+          # @types/node declares >=22 as the consumer floor; CI runs the current LTS.
+          node-version: '24.20.0'
           cache: npm
 
       - run: npm ci
