@@ -102,6 +102,8 @@ trailing period.
 
 ## Build and test
 
+Node.js 24 or newer (`engines`), TypeScript 6 compiling to ES2024.
+
 ```sh
 npm ci
 npm run build      # dist/, CommonJS + .d.ts, tests excluded
@@ -116,12 +118,12 @@ runs as-is, because its job is to be genuine ESM importing the built CommonJS pa
 ## Releasing
 
 ```sh
-NODE_AUTH_TOKEN=<github token with write:packages> sh scripts/release.sh 1.4.0
+NODE_AUTH_TOKEN=<npmjs.com automation token for the primegraph org> sh scripts/release.sh 1.4.0
 ```
 
 The argument is a bare semver — no leading `v`; the tag gets one. The script refuses to run on a dirty
 tree, off the default branch, or when the tag already exists, and it does all of those checks before it
 changes anything. It then bumps `package.json`, builds, commits `chore(release): v1.4.0`, tags, pushes
-the branch and the tag, and runs `npm publish` against `https://npm.pkg.github.com`.
+the branch and the tag, and runs `npm publish` against `https://registry.npmjs.org`.
 
 The publish token is written to a throwaway npm config file, never to a committed `.npmrc`.

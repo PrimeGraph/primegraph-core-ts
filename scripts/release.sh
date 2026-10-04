@@ -1,5 +1,5 @@
 #!/bin/sh
-# Release @primegraph/core to GitHub Packages.
+# Release @primegraph/core to the npm registry.
 #
 # Usage: sh scripts/release.sh <semver>       e.g. sh scripts/release.sh 1.4.0
 #
