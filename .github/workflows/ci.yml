@@ -71,7 +71,7 @@ jobs:
 
       - uses: actions/setup-node@v6.5.0
         with:
-          # @types/node declares >=22 as the consumer floor; CI runs the current LTS.
+          # package.json declares node >=24 in engines; CI runs that line.
           node-version: '24.20.0'
           cache: npm
 

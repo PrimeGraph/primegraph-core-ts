@@ -8,12 +8,14 @@
   "compilerOptions": {
     "declaration": true,
     "strict": true,
-    "target": "es2021",
+    "target": "es2024",
     "module": "node16",
     "moduleResolution": "node16",
     "rootDir": "./src",
     "outDir": "dist",
-    "lib": ["es2021", "dom"],
+    "lib": ["es2024", "dom"],
+    // The library is platform-neutral, so no ambient @types package is loaded.
+    "types": [],
     "skipLibCheck": true
   },
   "include": ["src"],
